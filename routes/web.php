@@ -10,5 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 	*/
-
 Route::get('/', 'PostController@index');
+Route::get('/posts', 'PostController@store');
+Route::get('/posts/create', 'PostController@create');
+Route::get('/posts/{post}', 'PostController@show');
+/* 注意 Route::get('/posts/create', 'PostController@create');がRoute::get('/posts/{post}', 'PostController@show');の
+   前にあるだけでも動かない */
