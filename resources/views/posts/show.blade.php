@@ -13,7 +13,23 @@
             {{ $post->title }}
         </h1>
         <div class="content">
-            <div class="content__post">
+	    <div class="content__post">
+		<p class="edit">[<a href="/posts/{{ $post->id }}/edit">edit</a>]</p>
+                	<form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">
+    				@csrf
+				@method('DELETE')
+				<input type="submit" style="display:none">
+    				<button id="delete" onclick="deletePost(this);">delete</button> 
+			</form>
+			<script type="text/javascript">
+			function deletePost(e) {
+				'use strict';
+				if(confirm('削除すると復元できません\n本当に削除しますか?')){
+					document.getElementById("delete").submit();	
+				}
+			}
+			</script>
+		<small>{{ $post->user->name }}</small>
                 <h3>本文</h3>
 		<p>{{ $post->body }}</p>
 		<h3>最終更新</h3>
